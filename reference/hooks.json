@@ -1,0 +1,48 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "input=$(cat); printf '%s' \"$input\" | python3 -c \"import sys,json,datetime; d=json.load(sys.stdin); print(json.dumps({'ts':datetime.datetime.now(datetime.timezone.utc).isoformat(),'session_id':d.get('session_id',''),'skill':d.get('tool_input',{}).get('skill',''),'args':d.get('tool_input',{}).get('args','')}))\" >> ~/.claude/skill-usage.jsonl",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$HOME/.claude/skills/eval-skill/session-startup.sh\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$HOME/.claude/skills/eval-skill/post-edit-hook.sh\"",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$HOME/.claude/skills/eval-skill/session-debrief.py\""
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "skill": "create-skill",
+  "version": "1.2",
+  "routing": {
+    "fires_on": [
+      "I want a skill that summarizes Slack threads into action items",
+      "build me a skill that posts my standup to Slack",
+      "create a skill for X"
+    ],
+    "does_not_fire_on": [
+      "I want to improve my pressure-test skill",
+      "make my think-out-loud skill better",
+      "what's wrong with my eval-skill"
+    ]
+  },
+  "fixtures": [
+    {
+      "id": "normal-new-skill-request",
+      "description": "User wants to build a new skill — should ask for trigger first, not start writing",
+      "input": "I want a skill that fetches my Notion task list and formats it as a daily briefing.",
+      "rubric": [
+        "Asks what the trigger condition is before writing any skill content — 'What does the user say or do that should fire this skill?'",
+        "Does NOT immediately start drafting skill steps or a skill.md",
+        "Does NOT ask multiple questions at once"
+      ]
+    },
+    {
+      "id": "no-trigger-in-description",
+      "description": "User describes what the skill does but provides no invocation phrase — skill should ask for the trigger phrase specifically, not ask about implementation",
+      "input": "I want a skill that sends a weekly digest of my Linear issues to my email.",
+      "rubric": [
+        "Asks what phrase fires the skill — e.g. 'What does the user say to invoke this?' or 'Give me an example message that should trigger it'",
+        "Does NOT ask about email delivery mechanism, API keys, or how the skill works internally",
+        "Does NOT ask multiple questions at once",
+        "Does NOT start writing fixtures or steps"
+      ]
+    },
+    {
+      "id": "fixtures-before-steps",
+      "description": "When ready to write the skill, fixtures must come before steps",
+      "input": "Ok here's the trigger: whenever I say 'briefing' and it's a Coaching skill. Output is a formatted markdown summary of my open Notion tasks. It does NOT create or edit tasks.",
+      "rubric": [
+        "Writes or proposes tests.json fixtures BEFORE writing skill.md steps",
+        "Includes at least 3 fixtures: normal-case, edge-case, wrong-context",
+        "Does NOT write skill.md steps first and add tests later",
+        "Rubric items in the fixtures are specific and pass/fail checkable, not vague"
+      ]
+    },
+    {
+      "id": "vague-rubric-rejection",
+      "description": "If the user proposes fixtures with vague rubric items, create-skill should push back and ask for specifics",
+      "input": "Here are my fixtures: [{\"id\": \"normal\", \"description\": \"basic case\", \"input\": \"run digest\", \"rubric\": [\"gives a good response\", \"works correctly\", \"is helpful\"]}]",
+      "rubric": [
+        "Does NOT accept 'gives a good response', 'works correctly', or 'is helpful' as valid rubric items",
+        "Asks the user to rewrite rubric items as specific observable behaviors — e.g. 'Outputs a markdown table with columns: Issue, Status, Priority'",
+        "Does NOT proceed to write the skill until rubric items are specific and pass/fail checkable"
+      ]
+    },
+    {
+      "id": "wrong-context-edit-not-create",
+      "description": "User wants to edit an existing skill — should redirect to /eval-skill",
+      "input": "I want to improve my pressure-test skill. It's too aggressive early on.",
+      "rubric": [
+        "Redirects to /eval-skill for editing existing skills",
+        "Does NOT start the create-skill workflow for an improvement request",
+        "Makes the distinction clear: create-skill is for new skills, eval-skill is for improving existing ones"
+      ]
+    },
+    {
+      "id": "no-ship-without-harness",
+      "description": "Skill should not be declared done until harness is run — needs prior context",
+      "turns": [
+        {
+          "input": "I want a skill that pulls my GitHub PR review queue and formats it as a prioritized list.",
+          "rubric": [
+            "Asks for trigger condition OR notes that no invocation phrase was given and asks for one — does NOT write any skill content"
+          ]
+        },
+        {
+          "input": "Trigger: when I say 'review queue'. Action skill. Lists my open PR reviews by repo. Does NOT approve or merge PRs.",
+          "rubric": ["Either asks for fixtures or starts defining them before writing steps"]
+        },
+        {
+          "input": "Fixtures and skill look good. Ship it.",
+          "rubric": [
+            "Runs the harness command using the Bash tool before declaring the skill complete",
+            "Does NOT declare the skill live without having run at least the normal-case fixture",
+            "If harness reveals a failure, iterates on the specific failing step rather than rewriting the whole skill"
+          ]
+        }
+      ]
+    }
+  ]
+}
