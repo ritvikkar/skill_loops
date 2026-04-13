@@ -6,6 +6,17 @@ The whole point of publishing this was so people could make it better. Here's ho
 
 ---
 
+## Don't have a fix? Open an issue
+
+If something broke or you found a better way but don't want to PR it, just open an issue. There are two templates:
+
+- **Something broke** — a script errored, a hook didn't fire, setup didn't work as written
+- **Something could be better** — you changed a script, found a gotcha, or discovered a better approach
+
+Issues are just as valuable as PRs. Knowing what breaks in other people's setups is how this gets better.
+
+---
+
 ## What's worth contributing
 
 - **Bug fixes** in the reference scripts (harness, hooks, debrief, startup)
