@@ -425,6 +425,8 @@ The whole system runs on one idea: if you can't grade it, you can't improve it. 
 
 ### Found a bug? Made it better?
 
-If you set this up and your Claude found a bug, improved a script, or discovered a gotcha I missed, I want the fix. Read CONTRIBUTING.md for the full workflow, but the short version: fork, branch, PR. Your Claude knows how to do all of it.
+If you set this up and something broke, or your Claude found a better way to do something, I want to know.
 
-One fix per PR. Show what you ran to verify it. Don't open PRs for untested changes.
+**Don't have a fix?** Open an issue. There are templates for "something broke" and "something could be better." Knowing what fails in setups that aren't mine is the fastest way this improves.
+
+**Have a fix?** Open a PR. CONTRIBUTING.md has the full workflow, including step-by-step instructions your Claude can execute directly. Fork, branch, PR. One fix per PR, show what you ran to verify it.

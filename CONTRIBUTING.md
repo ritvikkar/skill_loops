@@ -17,7 +17,18 @@ Not looking for: new features that only work in your specific setup, cosmetic re
 
 ---
 
-## How to contribute
+## Don't have a fix? Just tell me what broke
+
+Not everything needs a PR. If a script errored, a hook didn't fire, or the README told you to do something that didn't work, open an issue. There are two templates:
+
+- **"Something broke"** — it errored, it didn't fire, the instructions were wrong
+- **"Something could be better"** — you found a better approach or a gotcha I should document
+
+Knowing what breaks in setups that aren't mine is the fastest way this gets better. You don't need to fix it yourself.
+
+---
+
+## Have a fix? Open a PR
 
 ### If you're a human
 
