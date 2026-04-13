@@ -420,3 +420,11 @@ I stopped guessing which skills need work. The scores tell me. I stopped doing b
 The whole system runs on one idea: if you can't grade it, you can't improve it. And if you can grade it, improvement is just a loop.
 
 **I built a system where my AI tests itself, finds its worst behavior, and fixes it. The fact that this sentence makes sense is either very cool or deeply weird. Probably both.**
+
+---
+
+### Found a bug? Made it better?
+
+If you set this up and your Claude found a bug, improved a script, or discovered a gotcha I missed, I want the fix. Read CONTRIBUTING.md for the full workflow, but the short version: fork, branch, PR. Your Claude knows how to do all of it.
+
+One fix per PR. Show what you ran to verify it. Don't open PRs for untested changes.
